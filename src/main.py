@@ -19,7 +19,7 @@ async def add_metric(metric: Metric):
         "timestamp": timestamp
     }
 
-    redis_client.rpush(name, value)
+    redis_client.rpush(name, json.dumps(value))
 
     return { "status": "ok" }
 
