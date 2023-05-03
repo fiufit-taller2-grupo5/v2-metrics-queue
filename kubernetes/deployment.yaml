@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-queue-deployment
+  labels:
+    app: metrics-queue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-queue
+  template:
+    metadata:
+      labels:
+        app: metrics-queue
+    spec:
+      containers:
+        - name: metrics-queue
+          image: registry.cloud.okteto.net/prod-szwtomas/metrics-queue:v1
+          ports:
+            - containerPort: 80
+      # This means that, if the container exits for any reason, it should restart again. It is the default value
+      # Other options are OnFailure y Never
+      restartPolicy: Always
