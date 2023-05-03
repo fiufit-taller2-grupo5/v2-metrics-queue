@@ -8,19 +8,10 @@ app = FastAPI()
 
 @app.post("/metrics")
 async def add_metric(metric: Metric):
-    payload = metric.payload
-    name = metric.metric_name
     timestamp = metric.timestamp
+    value = { "payload": json.dumps(metric.payload), "timestamp": timestamp }
 
-    json_payload = json.dumps(payload)
-
-    value = {
-        "payload": json_payload,
-        "timestamp": timestamp
-    }
-
-    redis_client.rpush(name, json.dumps(value))
+    redis_client.rpush(metric.metric_name, json.dumps(value))
 
     return { "status": "ok" }
-
 

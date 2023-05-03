@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: metrics-queue
-          image: registry.cloud.okteto.net/prod-szwtomas/metrics-queue:v1
+          image: registry.cloud.okteto.net/prod-szwtomas/metrics-queue:v2
           ports:
             - containerPort: 80
       # This means that, if the container exits for any reason, it should restart again. It is the default value
